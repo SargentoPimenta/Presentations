@@ -1,0 +1,55 @@
+#include <stdio.h>
+ 
+void main()
+{
+    int heap[10], no, i, j, c, raiz, temp;
+ 
+    printf("\n Digite o número de elementos :");
+    scanf("%d", &no);
+    printf("\n Digiteos números : ");
+    for (i = 0; i < no; i++)
+       scanf("%d", &heap[i]);
+    for (i = 1; i < no; i++)
+    {
+        c = i;
+        do
+        {
+            raiz = (c - 1) / 2;             
+            if (heap[raiz] < heap[c])   
+            {
+                temp = heap[raiz];
+                heap[raiz] = heap[c];
+                heap[c] = temp;
+            }
+            c = raiz;
+        } while (c != 0);
+    }
+ 
+    printf("Heap array : ");
+    for (i = 0; i < no; i++)
+        printf("%d\t ", heap[i]);
+    for (j = no - 1; j >= 0; j--)
+    {
+        temp = heap[0];
+        heap[0] = heap[j];   
+        heap[j] = temp;
+        raiz = 0;
+        do 
+        {
+            c = 2 * raiz + 1;    
+            if ((heap[c] < heap[c + 1]) && c < j-1)
+                c++;
+            if (heap[raiz]<heap[c] && c<j)    
+            {
+                temp = heap[raiz];
+                heap[raiz] = heap[c];
+                heap[c] = temp;
+            }
+            raiz = c;
+        } while (c < j);
+        
+    }
+    printf("\n Array a seguir : ");
+    for (i = 0; i < no; i++)
+       printf("\t %d", heap[i]);
+}
